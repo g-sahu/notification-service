@@ -1,4 +1,4 @@
-package org.gaurav.notification_service;
+package org.gaurav.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
