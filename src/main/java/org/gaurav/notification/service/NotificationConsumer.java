@@ -5,6 +5,7 @@ import org.gaurav.notification.dto.Notification;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
+import tools.jackson.databind.json.JsonMapper;
 
 @Slf4j
 @Component
@@ -18,7 +19,9 @@ public class NotificationConsumer {
     @KafkaListener(topics = "${app.kafka.topic.notifications}")
     public void consume(Notification notification, Acknowledgment ack) {
         String notificationId = notification.getNotificationId();
-        log.info("Received notification event [id={}, channels={}]", notificationId, notification.getChannels());
+        JsonMapper jsonMapper = new JsonMapper();
+        String n = jsonMapper.writeValueAsString(notification);
+        log.info("Received notification event: {}", n);
 
         try {
             notificationDispatcher.dispatch(notification);

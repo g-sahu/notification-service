@@ -12,8 +12,9 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
       properties:
         spring.json.trusted.packages: "org.gaurav.notification.dto"
-      listener:
-        ack-mode: manual
+        spring.json.value.default.type: "org.gaurav.notification.dto.Notification"
+    listener:
+      ack-mode: manual
 
 app:
   kafka:
