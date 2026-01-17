@@ -15,7 +15,7 @@ public class NotificationConsumer {
         this.notificationDispatcher = notificationDispatcher;
     }
 
-    @KafkaListener(topics = "notifications.send", containerFactory = "kafkaListenerContainerFactory")
+    @KafkaListener(topics = "${app.kafka.topic.notifications}")
     public void consume(Notification notification, Acknowledgment ack) {
         String notificationId = notification.getNotificationId();
         log.info("Received notification event [id={}, channels={}]", notificationId, notification.getChannels());
